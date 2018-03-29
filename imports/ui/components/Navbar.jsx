@@ -1,14 +1,24 @@
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
 export default class Navbar extends Component {
-  constructor(){
+  constructor() {
     super();
-    this.state = {change: false};
+    this.state = { change: false };
   }
-  logout(){
+  logout() {
     Session.set("current", null);
     let a = !this.state.change;
-    this.setState({change: a});
+    this.setState({ change: a });
+    Meteor.logout();
+    FlowRouter.go('/')
+  }
+
+  name() {
+    if (Session.get("current")) {
+      return Session.get("current").username;
+    }
+
+    return Meteor.user().username;
   }
 
   render() {
@@ -19,41 +29,41 @@ export default class Navbar extends Component {
             MateQuiz
           </a>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            {Session.get("current") ? (
+            {Meteor.user() ? (
               <li>
-              <a>{Session.get("current").username}</a>
+                <a>{this.name()}</a>
               </li>
             ) : (
               ""
             )}
-            {Session.get("current") ? (
+            {Meteor.user() ? (
               <li>
                 <a href="/Inicio">Inicio</a>
               </li>
             ) : (
               ""
             )}
-            {Session.get("current") ? (
+            {Meteor.user() ? (
               <li>
                 <a onClick={this.logout.bind(this)}>Cerrar Sesion</a>
               </li>
             ) : (
               ""
             )}
-            { !Session.get("current") ? (
-            <li>
-              <a href="/Login">Login</a>
-            </li>
-            ): ( ""
-          )
-            }
-            { !Session.get("current") ? (
-            <li>
-              <a href="/Registro">Registro</a>
-            </li>
-            ): ( ""
-          )
-            }
+            {!Meteor.user() ? (
+              <li>
+                <a href="/Login">Login</a>
+              </li>
+            ) : (
+              ""
+            )}
+            { !Meteor.user() ? (
+              <li>
+                <a href="/Registro">Registro</a>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </nav>

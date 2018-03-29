@@ -9,20 +9,13 @@ class App extends Component {
     super(props);
   }
 
-  isLoggeded() {
-    if (this.props.currentUser) {
-      return "";
-      return <Login />;
-    }
-  }
-
   render() {
     return (
       <div>
         <Navbar />
         <div className="container">
           <h1>Bienvenido a MateQuiz</h1>
-            <h4>Un proyecto diseñado para que puedes practicar matematicas de una manera divertida</h4>m
+            <h4>Un proyecto diseñado para que puedes practicar matematicas de una manera divertida</h4>
         </div>
       </div>
     );

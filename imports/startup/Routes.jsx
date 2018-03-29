@@ -5,11 +5,9 @@ import { mount } from 'react-mounter';
 import AppContainer from "../ui/App";
 import LoginContainer from "../ui/components/Login";
 import RegistroContainer from "../ui/components/Register";
-//import ListPageContainer from '../../ui/containers/ListPageContainer.jsx';
-//import AuthPageSignIn from '../../ui/pages/AuthPageSignIn.jsx';
-//import AuthPageJoin from '../../ui/pages/AuthPageJoin.jsx';
-//import NotFoundPage from '../../ui/pages/NotFoundPage.jsx';
-
+import InicioContainer from "../ui/components/Inicio"
+import PartidaContainer from "../ui/components/Partida"
+import PreguntaContainer from "../ui/components/Pregunta"
 FlowRouter.route('/', {
   name: 'main',
   action() {
@@ -28,5 +26,26 @@ FlowRouter.route('/Registro', {
   name: 'Registro',
   action() {
     mount(RegistroContainer);
+  },
+});
+
+FlowRouter.route('/Inicio', {
+  name: 'Inicio',
+  action() {
+    mount(InicioContainer);
+  },
+});
+
+FlowRouter.route('/Partida', {
+  name: 'Partida',
+  action() {
+    mount(PartidaContainer);
+  },
+});
+
+FlowRouter.route('/Pregunta', {
+  name: 'Pregunta',
+  action() {
+    mount(PreguntaContainer);
   },
 });
