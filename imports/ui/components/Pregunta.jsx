@@ -60,6 +60,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="primera"
               type="radio"
+              disabled={this.state.visibilty}
             />
             <span>{this.state.data.primera}</span>
           </label>
@@ -72,6 +73,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="segunda"
               type="radio"
+              disabled={this.state.visibilty}
             />
             <span>{this.state.data.segunda}</span>
           </label>
@@ -84,6 +86,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="tercera"
               type="radio"
+              disabled={this.state.visibilty}
             />
             <span>{this.state.data.tercera}</span>
           </label>
@@ -96,6 +99,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="cuarta"
               type="radio"
+              disabled={this.state.visibilty}
             />
             <span>{this.state.data.cuarta}</span>
           </label>
@@ -108,6 +112,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="quinta"
               type="radio"
+              disabled={this.state.visibilty}
             />
             <span>{this.state.data.quinta}</span>
           </label>
