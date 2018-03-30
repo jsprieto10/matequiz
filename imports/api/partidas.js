@@ -6,5 +6,7 @@ export const Partidas = new Mongo.Collection("partidas");
 
 Meteor.methods({
     "partidas.insert"(){
+
+        Partidas.insert();
     }
 })

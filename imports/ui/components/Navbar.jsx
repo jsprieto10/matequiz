@@ -38,7 +38,7 @@ export default class Navbar extends Component {
             )}
             {Meteor.user() ? (
               <li>
-                <a href="/Inicio">Inicio</a>
+                <a onClick={() => FlowRouter.go('/Inicio')}>Inicio</a>
               </li>
             ) : (
               ""
@@ -52,14 +52,14 @@ export default class Navbar extends Component {
             )}
             {!Meteor.user() ? (
               <li>
-                <a href="/Login">Login</a>
+                <a onClick={ () =>FlowRouter.go('/Login')}>Login</a>
               </li>
             ) : (
               ""
             )}
             { !Meteor.user() ? (
               <li>
-                <a href="/Registro">Registro</a>
+                <a onClick={() => FlowRouter.go('/Registro')}>Registro</a>
               </li>
             ) : (
               ""
