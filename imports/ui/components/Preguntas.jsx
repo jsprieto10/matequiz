@@ -5,13 +5,23 @@ import Pregunta from "./Pregunta";
 import { ApiPreguntas } from "../../api/preguntas.js";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
+import { Tab } from "semantic-ui-react";
 
 class Preguntas extends Component {
   cargar() {
     if (this.props.questions[0]) {
       let j = 0;
       return this.props.questions.map(p => {
-        if (p) return <Pregunta key={p._id} data={p} />;
+        j++;
+        if (p)
+          return {
+            menuItem: "Pregunta " + j,
+            render: () => (
+              <Tab.Pane>
+                <Pregunta key={p._id} data={p} />
+              </Tab.Pane>
+            )
+          };
       });
     }
   }
@@ -20,7 +30,10 @@ class Preguntas extends Component {
     return (
       <div>
         <Navbar />
-        <div className="container">{this.cargar()}</div>
+        <div className="container">
+        <br/>
+          <Tab panes={this.cargar()} />
+        </div>
       </div>
     );
   }
