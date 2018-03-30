@@ -10,6 +10,7 @@ class Partida extends Component {
     super();
   }
 
+  
   prueba() {
     if (this.props.contricante) {
       return <h1>Tu contricante es {this.props.contricante.username}</h1>;
