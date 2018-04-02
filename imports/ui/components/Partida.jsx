@@ -90,7 +90,7 @@ class Partida extends Component {
           " sigue jugando para poder mejorar";
       }
     } else if (this.suma(a) < this.suma(b)) {
-      if (this.esJugador1()) {
+      if (!this.esJugador1()) {
         c =
           "Felicitaciones haz ganado: " +
           Meteor.user().username +
@@ -110,7 +110,7 @@ class Partida extends Component {
   modal() {
     return (
       <Modal open={this.state.modalOpen} basic size="small">
-        <Header icon="winner" content="Se hora de conocer el resultado" />
+        <Header icon="winner" content="Es hora de conocer el resultado" />
         <Modal.Content>
           <h3>{this.ganador()}</h3>
         </Modal.Content>

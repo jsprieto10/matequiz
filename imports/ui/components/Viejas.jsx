@@ -92,7 +92,7 @@ class Viejas extends Component {
                 >
                   <Header
                     icon="winner"
-                    content="Se hora de conocer el resultado"
+                    content="Es hora de conocer el resultado"
                   />
                   <Modal.Content>
                     <Preguntas
