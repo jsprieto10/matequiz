@@ -14,7 +14,6 @@ class App extends Component {
       <div>
         <Navbar />
         <div className="container">
-        <button onClick={() => FlowRouter.go('/Inicio')}></button>
           <h1>Bienvenido a MateQuiz</h1>
             <h4>Un proyecto diseñado para que puedes practicar matematicas de una manera divertida</h4>
         </div>
