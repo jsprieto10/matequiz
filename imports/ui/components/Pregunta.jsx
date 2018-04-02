@@ -120,7 +120,8 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="cuarta"
               type="radio"
-
+              disabled={this.state.visibilty}
+              checked={"cuarta"==this.state.escogida}
             />
             <span>{this.state.data.cuarta}</span>
           </label>
@@ -133,6 +134,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="quinta"
               type="radio"
+              disabled={this.state.visibilty}
               checked={"quinta"==this.state.escogida}
             />
             <span>{this.state.data.quinta}</span>

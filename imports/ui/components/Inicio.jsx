@@ -3,7 +3,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import Navbar from "./Navbar";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
-
+import Viejas from "./Viejas";
 class Inicio extends Component {
   constructor() {
     super();
@@ -24,6 +24,7 @@ class Inicio extends Component {
                 pregunta podras ver si tu contricante ha acertado su pregunta o
                 no.
               </p>
+              <br />
             </div>
           </div>
 
@@ -37,6 +38,20 @@ class Inicio extends Component {
             >
               Iniciar
             </button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s8">
+            <div className="container">
+              <h3>Mira tus partidas jugadas</h3>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <div className="container">
+              <Viejas />
+            </div>
           </div>
         </div>
       </div>
