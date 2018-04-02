@@ -20,7 +20,8 @@ class Preguntas extends Component {
             menuItem: "Pregunta " + j,
             render: () => (
               <Tab.Pane>
-                <Pregunta key={p._id} data={p} />
+                <Pregunta key={p.data._id} data={p.data} posicion={p.index} sesionId={this.props.sesion} respuestasJug={this.props.respuesta}
+                cualJugador={this.props.jugador} escogidasJug={this.props.escogida}/>
               </Tab.Pane>
             )
           };

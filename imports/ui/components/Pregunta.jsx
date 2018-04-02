@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { Preguntas } from "../../api/preguntas.js";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
+import { ApiPreguntas } from "../../api/preguntas.js";
 
 class Pregunta extends Component {
   constructor(props) {
@@ -11,18 +12,35 @@ class Pregunta extends Component {
     this.state = {
       data: props.data,
       visibilty: false,
-      choose: false
+      choose: false,
+      escogida: props.escogidasJug[props.posicion]
     };
+  }
+
+  componentDidMount(){
+    let a = this.props.respuestasJug;
+    if (a[this.props.posicion] == -1){
+      this.setState({visibilty: true})
+    }
+    else if (a[this.props.posicion] == 1){
+      this.setState({ visibilty: true, choose: true });
+    }
   }
 
   handleChange(event) {
     let name = event.target.id;
     let value = event.target.value;
+    let a = this.props.respuestasJug;
     if (value == this.state.data.respuesta) {
       this.setState({ visibilty: true, choose: true });
+      a[this.props.posicion] = 1;
     } else {
+      a[this.props.posicion] = -1;
       this.setState({ visibilty: true });
     }
+    let b = this.props.escogidasJug;
+    b[this.props.posicion] = value
+    Meteor.call("espera.updateRespuestas", this.props.sesionId, this.props.cualJugador, a, b)
   }
 
   answer() {
@@ -50,7 +68,7 @@ class Pregunta extends Component {
     return (
       <div className="container">
         <h3>Pregunta: </h3>
-        <img src={this.props.data.pregunta} alt="" />
+        <img src={this.props.data.pregunta} width="80%" alt="" />
         <br />
         <p>
           <label>
@@ -61,6 +79,7 @@ class Pregunta extends Component {
               value="primera"
               type="radio"
               disabled={this.state.visibilty}
+              checked={"primera"==this.state.escogida}
             />
             <span>{this.state.data.primera}</span>
           </label>
@@ -74,6 +93,7 @@ class Pregunta extends Component {
               value="segunda"
               type="radio"
               disabled={this.state.visibilty}
+              checked={"segunda"==this.state.escogida}
             />
             <span>{this.state.data.segunda}</span>
           </label>
@@ -87,6 +107,7 @@ class Pregunta extends Component {
               value="tercera"
               type="radio"
               disabled={this.state.visibilty}
+              checked={"tercera"==this.state.escogida}
             />
             <span>{this.state.data.tercera}</span>
           </label>
@@ -99,7 +120,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="cuarta"
               type="radio"
-              disabled={this.state.visibilty}
+
             />
             <span>{this.state.data.cuarta}</span>
           </label>
@@ -112,7 +133,7 @@ class Pregunta extends Component {
               onChange={this.handleChange.bind(this)}
               value="quinta"
               type="radio"
-              disabled={this.state.visibilty}
+              checked={"quinta"==this.state.escogida}
             />
             <span>{this.state.data.quinta}</span>
           </label>
