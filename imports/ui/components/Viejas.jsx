@@ -127,7 +127,7 @@ export default withTracker(() => {
       { jugador1: Meteor.user()._id, terminado: true },
       { jugador2: Meteor.user()._id, terminado: true }
     ]
-  }).fetch();
+  }).fetch().reverse();
   return {
     partidas: encontradas
   };
