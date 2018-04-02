@@ -118,6 +118,7 @@ class Pregunta extends Component {
           </label>
         </p>
         {this.answer()}
+        {this.state.data._id}
       </div>
     );
   }

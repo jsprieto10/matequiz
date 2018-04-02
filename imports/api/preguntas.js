@@ -7,7 +7,7 @@ export const ApiPreguntas = new Mongo.Collection("preguntas");
 Meteor.methods({
     "preguntas.insert"(pregunta, primera, segunda, tercera, cuarta,quinta, respuesta){
         
-        ApiPreguntas.insert({
+        PreguntasApi.insert({
             pregunta,
             primera,
             segunda,
