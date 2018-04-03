@@ -5,6 +5,7 @@ export default class Navbar extends Component {
     super();
     this.state = { change: false };
   }
+  // Cuando se pone en modo responsive no aparecen botones en la navbar para poder iniciar sesión o crear cuenta
   logout() {
     Session.set("current", null);
     let a = !this.state.change;
