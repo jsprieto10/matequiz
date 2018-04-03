@@ -42,7 +42,13 @@ class Pregunta extends Component {
     b[this.props.posicion] = value
     Meteor.call("espera.updateRespuestas", this.props.sesionId, this.props.cualJugador, a, b)
   }
-
+  // Sería bueno marcar la opción que fue seleccionada
+  // No entiendo para qué sirve el checkbox cuando sale incorrecto. No creo que sirva poder poner un chulo en el checkbox de incorrecto
+  // Sería mejor para el usuario si agregan un botón para avanzar a la siguiente pregunta.
+  // La letra de las preguntas a veces es muy pequeña y difícil de leer
+  // Probando la aplicación me salió una pregunta en la que el enunciado se demoró varios segundos en cargar, solo aprarecían las respuestas
+  // No hay ningun mensaje o acción cuando se terminan las preguntas
+  
   answer() {
     if (this.state.visibilty) {
       if (this.state.choose) {
