@@ -20,7 +20,7 @@ sobre la carpeta frontned
 * [__Cristian Camilo Novoa__](https://github.com/ccnovoa11)
 
 
-## Licensia
+## Licencia 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository has the standard MIT license. You can find it [here.](https://github.com/jsprieto10/matequiz/blob/master/LICENSE)
