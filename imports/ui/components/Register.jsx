@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Navbar from "./Navbar";
 import { Accounts } from "meteor/accounts-base";
+// Agregar notificación de éxito cuando se crea una cuenta. Actualmente no pasa nada al oprimir el botón de registrar
+// El único mensaje para guiar al usuario aparece luego de volver a oprimir registrar avisando que ya existe la cuenta
 class Register extends Component {
   constructor() {
     super();
