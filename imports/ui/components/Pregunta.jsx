@@ -6,6 +6,11 @@ import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { ApiPreguntas } from "../../api/preguntas.js";
 
+
+//Nicols Acevedo: 
+//Se podría cambiar de pregunta a medida que se responden. Adicionalmente, es mejor usar texto para la parte escrita de la pregunta por que no e ve esteticamnete bien. 
+//Sugerencia de cambios en el codigo.
+
 class Pregunta extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +46,9 @@ class Pregunta extends Component {
     let b = this.props.escogidasJug;
     b[this.props.posicion] = value
     Meteor.call("espera.updateRespuestas", this.props.sesionId, this.props.cualJugador, a, b)
+    
+    //Nicols Acevedo
+    this.props.nextQuestion();  // esta función debe estar implementada en la questions en donde vaya cambiando la pregunta uqe etsa visible actualmente. 
   }
 
   answer() {
