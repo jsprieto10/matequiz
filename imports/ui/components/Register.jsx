@@ -20,6 +20,7 @@ class Register extends Component {
   }
 
   handleSubmit(e) {
+    //Nicolás Acevedo: Handle Submit no esta funcionando con el primer click hay que hacer dos clicks pero el usuario si queda registrado en el primer click. Revisar como cambian de URL. Además hay que hacer que se re-renderice y se vea que el usuario esta loggeado. 
     e.preventDefault();
     const confirmPassword = ReactDOM.findDOMNode(this.refs.confirmPassWord)
       .value;
@@ -43,7 +44,8 @@ class Register extends Component {
                 console.log("se ha loggeado");
                 let current = Meteor.user();
                 Session.set("current", current);
-                FlowRouter.go('/');
+                FlowRouter.go('/'); // Nicolás Acevedo: Esta ruta no esta funcionando bien. 
+                render(); // Nicolás Acevedo: Cambio propuesto par renderizar otra vez 
               }
             }
           );
