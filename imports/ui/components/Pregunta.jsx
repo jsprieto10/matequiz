@@ -34,6 +34,7 @@ class Pregunta extends Component {
     if (value == this.state.data.respuesta) {
       this.setState({ visibilty: true, choose: true });
       a[this.props.posicion] = 1;
+      Meteor.users.update({_id: Meteor.user()._id}, {$inc: {"profile.points": 10}});
     } else {
       a[this.props.posicion] = -1;
       this.setState({ visibilty: true });
@@ -53,10 +54,15 @@ class Pregunta extends Component {
           </label>
         );
       } else {
+        let respuesta = this.state.data.primera;
+        if ("segunda" == this.state.data.respuesta) respuesta = this.state.data.segunda;
+        else if ("tercera" == this.state.data.respuesta) respuesta = this.state.data.tercera;
+        else if ("cuarta" == this.state.data.respuesta) respuesta = this.state.data.cuarta;
+        else if ("quinta" == this.state.data.respuesta) respuesta = this.state.data.quinta;
         return (
           <label>
             <input type="checkbox" />
-            <span>Incorrecto</span>
+            <span>Incorrecto, la respuesta correcta era {respuesta}</span>
           </label>
         );
       }

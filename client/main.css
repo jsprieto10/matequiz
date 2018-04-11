@@ -1,0 +1,39 @@
+div.podium{
+    margin: auto;
+    width: 60% !important;
+}
+
+
+div.first{
+    background-color: yellow;
+    color: yellow;
+    margin-top: 5px;
+    padding-bottom: 80px !important;
+}
+
+div.second{
+    background-color: red;
+    color: red;
+    margin-top: 5px;
+    padding-bottom: 40px !important;
+}
+
+div.third{
+    background-color: blue;
+    color: blue;
+    margin-top: 5px;
+    padding-bottom: 20px !important;
+}
+div.pad{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+div.second_content{
+    margin-top: 40px;
+}
+
+div.third_content{
+    margin-top: 60px;
+}
+

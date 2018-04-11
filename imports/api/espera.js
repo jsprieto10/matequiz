@@ -53,6 +53,8 @@ Meteor.methods({
     }
   },
   "espera.updateGanador"(id, win, lose, ter) {
+    Meteor.users.update({_id: win}, {$inc: {"profile.wins": 1}});
+    Meteor.users.update({_id: lose}, {$inc: {"profile.losts": 1}});
     Espera.update({ _id: id }, { $set: { ganador: win, perdedor: lose, terminado: true } });
   }
 });

@@ -9,6 +9,7 @@ import InicioContainer from "../ui/components/Inicio";
 import PartidaContainer from "../ui/components/Partida";
 import AgregarPreguntaContainer from "../ui/components/AgregarPregunta";
 import PreguntasContainer from "../ui/components/Preguntas";
+import LeaderboardsContainer from "../ui/components/Leaderboards";
 FlowRouter.route('/', {
   name: 'main',
   action() {
@@ -55,5 +56,12 @@ FlowRouter.route('/Preguntas', {
   name: 'Preguntas',
   action() {
     mount(PreguntasContainer);
+  },
+});
+
+FlowRouter.route('/LeaderBoards', {
+  name: 'LeaderBoards',
+  action() {
+    mount(LeaderboardsContainer);
   },
 });

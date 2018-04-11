@@ -38,6 +38,13 @@ export default class Navbar extends Component {
             )}
             {Meteor.user() ? (
               <li>
+                <a onClick={() => FlowRouter.go('/LeaderBoards')}>LeaderBoards</a>
+              </li>
+            ) : (
+              ""
+            )}
+            {Meteor.user() ? (
+              <li>
                 <a onClick={() => FlowRouter.go('/Inicio')}>Inicio</a>
               </li>
             ) : (

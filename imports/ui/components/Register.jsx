@@ -8,7 +8,15 @@ class Register extends Component {
     this.state = {
       email: "",
       password: "",
-      username: ""
+      username: "",
+      profile:{
+        wins: 0,
+        losts: 0,
+        img_profile:0,
+        img_complete: false,
+        points: 0,
+
+      }
     };
   }
 
@@ -42,7 +50,6 @@ class Register extends Component {
               } else {
                 console.log("se ha loggeado");
                 let current = Meteor.user();
-                Session.set("current", current);
                 FlowRouter.go('/');
               }
             }
