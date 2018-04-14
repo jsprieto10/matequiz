@@ -9,21 +9,46 @@ class Register extends Component {
       email: "",
       password: "",
       username: "",
-      profile:{
+      profile: {
         wins: 0,
         losts: 0,
-        img_profile:0,
-        img_complete: false,
+        img_profile: "",
         points: 0,
-
+        sexo: "",
+        nacimiento: null
       }
     };
+  }
+
+  profileImage() {
+    estado = this.state.profile;
+    if (estado.sexo == "masculino") {
+      estado.img_profile =
+        "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100";
+    } else {
+      estado.img_profile =
+        "http://www.epsomps.vic.edu.au/wp-content/uploads/2016/09/512x512-1-300x300.png";
+    }
+    this.setState({ profile: estado });
   }
 
   handleChange(event) {
     event.preventDefault();
     let name = event.target.id;
     let value = event.target.value;
+    if (name == 'sexo'){
+      estado = this.state.profile;
+      estado.sexo=value
+      if ( value=='masculino') estado.img_profile = "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100"
+      else estado.img_profile = "http://www.epsomps.vic.edu.au/wp-content/uploads/2016/09/512x512-1-300x300.png"
+      this.setState({ profile: estado });
+    }
+    else if (name=='nacimiento'){
+      estado = this.state.profile;
+      estado.nacimiento=value
+      this.setState({ profile: estado });
+    }
+    else
     this.setState({ [name]: value });
   }
 
@@ -50,7 +75,7 @@ class Register extends Component {
               } else {
                 console.log("se ha loggeado");
                 let current = Meteor.user();
-                FlowRouter.go('/');
+                FlowRouter.go("/");
               }
             }
           );
@@ -117,6 +142,39 @@ class Register extends Component {
                     required
                   />
                   <label htmlFor="confirmPassword">Confirm Password</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col s12">
+                  <label>
+                    Selecciona tu sexo: 
+                    <select
+                      id="sexo"
+                      className="browser-default"
+                      value={this.state.profile.sexo}
+                      onChange={this.handleChange.bind(this)}
+                    >
+                      <option value="" disabled={true}>
+                        __ 
+                      </option>
+                      <option value="masculino">Masculino</option>
+                      <option value="femenino">Femenino</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col s12">
+                  <label>
+                    Agrega tu año de nacimiento: 
+                    </label>
+                    <input
+                    id="nacimiento"
+                    type="date"
+                    className="validate"
+                    required
+                    onChange={this.handleChange.bind(this)}
+                  />
                 </div>
               </div>
               <div className="row">

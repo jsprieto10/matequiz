@@ -31,7 +31,7 @@ export default class Navbar extends Component {
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             {Meteor.user() ? (
               <li>
-                <a>{this.name()}</a>
+                <a onClick={() => FlowRouter.go('/Perfil')}>{this.name()}</a>
               </li>
             ) : (
               ""
