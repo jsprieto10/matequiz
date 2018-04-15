@@ -37,7 +37,7 @@ class Pregunta extends Component {
 
     if (respuesta != 0) {
       Meteor.call(
-        "preguntas.insert",
+        "preguntasParciales.insert",
         pregunta,
         primera,
         segunda,

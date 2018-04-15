@@ -41,6 +41,7 @@ class Perfil extends Component {
         open={this.state.modalOpen}
         onClose={this.handleClose}
         size="small"
+        basic
       >
         <Header icon="browser" content="Actualiza tu foto de perfil" />
         <Modal.Content>
@@ -53,7 +54,7 @@ class Perfil extends Component {
             />
         </Modal.Content>
         <Modal.Actions>
-          <Button color="green" onClick={this.handleSubmit.bind(this)}>
+          <Button color="green" inverted onClick={this.handleSubmit.bind(this)}>
             <Icon name="checkmark" /> Cambiar foto
           </Button>
         </Modal.Actions>

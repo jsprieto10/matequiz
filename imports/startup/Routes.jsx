@@ -11,6 +11,7 @@ import AgregarPreguntaContainer from "../ui/components/AgregarPregunta";
 import PreguntasContainer from "../ui/components/Preguntas";
 import LeaderboardsContainer from "../ui/components/Leaderboards";
 import PerfilContainer from "../ui/components/Perfil";
+import CalificarPreguntaContainer from "../ui/components/CalificarPregunta";
 FlowRouter.route('/', {
   name: 'main',
   action() {
@@ -71,5 +72,12 @@ FlowRouter.route('/Perfil', {
   name: 'Perfil',
   action() {
     mount(PerfilContainer);
+  },
+});
+
+FlowRouter.route('/CalificarPregunta', {
+  name: 'CalificarPregunta',
+  action() {
+    mount(CalificarPreguntaContainer);
   },
 });

@@ -19,19 +19,6 @@ class Register extends Component {
       }
     };
   }
-
-  profileImage() {
-    estado = this.state.profile;
-    if (estado.sexo == "masculino") {
-      estado.img_profile =
-        "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100";
-    } else {
-      estado.img_profile =
-        "http://www.epsomps.vic.edu.au/wp-content/uploads/2016/09/512x512-1-300x300.png";
-    }
-    this.setState({ profile: estado });
-  }
-
   handleChange(event) {
     event.preventDefault();
     let name = event.target.id;
