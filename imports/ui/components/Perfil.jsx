@@ -7,6 +7,7 @@ import { Accounts } from "meteor/accounts-base";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
 import { ApiPreguntas } from "../../api/preguntas.js";
 import { ApiPreguntasParciales } from "../../api/preguntasParcial.js";
+import Footer from "./Footer";
 class Perfil extends Component {
   constructor() {
     super();
@@ -166,6 +167,7 @@ class Perfil extends Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

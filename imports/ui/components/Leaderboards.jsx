@@ -5,6 +5,7 @@ import ListaLeaders from "./ListaLeaders";
 import Podium from "./Podium";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
+import Footer from "./Footer";
 class Leaderboards extends Component {
   constructor() {
     super();
@@ -63,6 +64,7 @@ class Leaderboards extends Component {
         ) : (
           ""
         )}
+        <Footer/>
       </div>
     );
   }

@@ -7,6 +7,7 @@ import { ApiPreguntas } from "../../api/preguntas.js";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import Footer from "./Footer";
 
 class Partida extends Component {
   constructor() {
@@ -179,6 +180,7 @@ class Partida extends Component {
         <div className="row">
           <div>{this.prueba()}</div>
         </div>
+        <Footer/>
       </div>
     );
   }

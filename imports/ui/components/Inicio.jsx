@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import Viejas from "./Viejas";
+import Footer from "./Footer";
 class Inicio extends Component {
   constructor() {
     super();
@@ -72,6 +73,7 @@ class Inicio extends Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

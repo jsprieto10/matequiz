@@ -3,6 +3,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import Navbar from "./Navbar";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
+import Footer from "./Footer";
 
 class Pregunta extends Component {
   constructor() {
@@ -180,6 +181,7 @@ class Pregunta extends Component {
             </form>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

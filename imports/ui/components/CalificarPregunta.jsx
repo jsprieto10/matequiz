@@ -7,6 +7,7 @@ import { ApiPreguntasParciales } from "../../api/preguntasParcial.js";
 import { ApiPreguntas } from "../../api/preguntas.js";
 import { Accounts } from "meteor/accounts-base";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import Footer from "./Footer";
 
 class CalificarPregunta extends Component {
 
@@ -57,6 +58,7 @@ class CalificarPregunta extends Component {
               <h4>No se ha encontrado ninguna pregunta para calificar, vuelve más tarde</h4>
             )}
           </div>
+          <Footer/>
         </div>
       );
     else {
@@ -64,6 +66,7 @@ class CalificarPregunta extends Component {
         <div>
           <Navbar />
           <h3>Debes loggearte primero</h3>
+          <Footer/>
         </div>
       );
     }

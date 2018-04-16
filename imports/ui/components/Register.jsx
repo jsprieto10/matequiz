@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Navbar from "./Navbar";
 import { Accounts } from "meteor/accounts-base";
+import Footer from "./Footer";
 class Register extends Component {
   constructor() {
     super();
@@ -169,6 +170,7 @@ class Register extends Component {
             </form>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 class Login extends Component {
     constructor(){
         super();
@@ -59,6 +60,7 @@ class Login extends Component {
             </form>
           </div>
         </div>
+        <Footer/>
       </div>
     );
   }
