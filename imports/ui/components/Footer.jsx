@@ -26,7 +26,7 @@ function Footer() {
       <div>
           <div style={phantom} />
           <div style={style}>
-          © Made with by <Icon name="like" className="noneBg"/>  Juan Sebastian Prieto & Critian Novoa 
+          © Made with <Icon name="like" className="noneBg"/> by Juan Sebastian Prieto & Critian Novoa 
           </div>
       </div>
   )
