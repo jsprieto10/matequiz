@@ -22,7 +22,8 @@ class Viejas extends Component {
     super();
     this.state = {
       open: false,
-      activePage: 1
+      activePage: 1,
+      contricante: ""
     };
     this.openModal = this.openModal.bind(this);
   }
@@ -77,6 +78,39 @@ class Viejas extends Component {
     return Meteor.users.findOne(partida.ganador).username;
   }
 
+  paginacion(lista) {
+    if (lista.length === 0) return [];
+
+    let copia = [];
+    let min = (this.state.activePage - 1) * 6;
+    let max = min + 6;
+    if (max > lista.length) max = lista.length;
+
+    for (let i = min; i != max; i++) {
+      copia.push(lista[i]);
+    }
+    return copia;
+  }
+
+  cambioContricante(event) {
+    let name = event.target.id;
+    let value = event.target.value;
+    this.setState({ [name]: value });
+  }
+
+  filterContricante() {
+    return this.props.partidas.filter(pre => {
+      let contricante = Meteor.users.findOne(pre.ganador).username;
+      if (pre.ganador != Meteor.user()._id) {
+        contricante = Meteor.users.findOne(pre.perdedor).username;
+        
+      }
+      if (contricante.startsWith(this.state.contricante))
+        return true;
+      return false;
+    });
+  }
+
   render() {
     if (!Meteor.user()) {
       return (
@@ -85,7 +119,6 @@ class Viejas extends Component {
         </div>
       );
     }
-
     if (!this.props.partidas) {
       return (
         <div>
@@ -93,20 +126,32 @@ class Viejas extends Component {
         </div>
       );
     } else {
-      const { activePage } = this.state;
+      let lis = this.filterContricante();
+      let paginada = this.paginacion(lis);
       return (
         <div>
           <Grid columns={3}>
             <Grid.Column>
               <Pagination
-                activePage={activePage}
+                activePage={this.state.activePage}
                 onPageChange={this.handlePaginationChange.bind(this)}
                 totalPages={this.props.size}
               />
             </Grid.Column>
+            <Grid.Column>
+              <div className="input-field col s6">
+                <input
+                  id="contricante"
+                  type="text"
+                  className="validate"
+                  value={this.state.contricante}
+                  onChange={this.cambioContricante.bind(this)}
+                />
+                <label forhtml="contricante">First Name</label>
+              </div>
+            </Grid.Column>
             <Grid.Column />
-            <Grid.Column />
-            {this.props.partidas.map(p => {
+            {paginada.map(p => {
               return (
                 <Grid.Column key={p._id}>
                   <h4 className="center-align">{this.ganadoOPerdido(p)}</h4>

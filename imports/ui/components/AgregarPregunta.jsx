@@ -69,6 +69,7 @@ class Pregunta extends Component {
         <div className="container">
           <div className="row">
             <h4 className="text-center">Crear una nueva pregunta</h4>
+            <p>Cuando tu pregunta obtenga 10 likes, se agregara a la lista de preguntas del juego, pero si obtiene 10 dislikes se eliminara</p>
             <form
               onSubmit={this.handleSubmit.bind(this)}
               className="col offset-s4 s4"
