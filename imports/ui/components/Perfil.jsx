@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { withTracker } from "meteor/react-meteor-data";
 import Navbar from "./Navbar";
+import PreguntasAceptadas from "./PreguntasAceptadas";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import { ApiPreguntas } from "../../api/preguntas.js";
+import { ApiPreguntasParciales } from "../../api/preguntasParcial.js";
 class Perfil extends Component {
   constructor() {
     super();
     this.state = {
       open: false,
+      modalOpen: false,
       fotoNueva: ""
     };
   }
@@ -19,14 +23,16 @@ class Perfil extends Component {
 
   handleSubmit() {
     let foto = this.state.fotoNueva;
-    if (foto.toLowerCase().endsWith(".png") || foto.toLowerCase().endsWith(".jpg") || foto.toLowerCase().endsWith(".gif")){
+    if (
+      foto.toLowerCase().endsWith(".png") ||
+      foto.toLowerCase().endsWith(".jpg") ||
+      foto.toLowerCase().endsWith(".gif")
+    ) {
       Meteor.call("espera.updateImagen", foto);
       this.handleClose();
+    } else {
+      M.toast({ html: "El url debe tener la extensión de una imagen" });
     }
-    else{
-      M.toast({html: "El url debe tener la extensión de una imagen"});
-    }
-    
   }
 
   handleChange(event) {
@@ -45,13 +51,13 @@ class Perfil extends Component {
       >
         <Header icon="browser" content="Actualiza tu foto de perfil" />
         <Modal.Content>
-            <input
-              id="fotoNueva"
-              type="text"
-              onChange={this.handleChange.bind(this)}
-              required
-              placeholder="inserta un url"
-            />
+          <input
+            id="fotoNueva"
+            type="text"
+            onChange={this.handleChange.bind(this)}
+            required
+            placeholder="inserta un url"
+          />
         </Modal.Content>
         <Modal.Actions>
           <Button color="green" inverted onClick={this.handleSubmit.bind(this)}>
@@ -71,12 +77,12 @@ class Perfil extends Component {
         <Navbar />
         <div className="row">
           <div className="container">
-            <h3>Mira tu perfil</h3>
             <div className="col s4">
+              <h3>Mira tu perfil</h3>
               <div className="row">
                 <img
-                  width="300px"
-                  height="300px"
+                  width="250px"
+                  height="200px"
                   src={Meteor.user().profile.img_profile}
                   className="circle"
                   onClick={this.handleOpen.bind(this)}
@@ -88,6 +94,7 @@ class Perfil extends Component {
             </div>
             <div className="col s8">
               <div className="container">
+                <h3>Mira tu información</h3>
                 <table>
                   <thead>
                     <tr>
@@ -114,13 +121,49 @@ class Perfil extends Component {
             </div>
           </div>
         </div>
+        <div className="row">
+          <div className="col s8">
+            <div className="container">
+              <h3>Mira tus preguntas aceptadas</h3>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <div className="container">
+              <PreguntasAceptadas listaAceptadas={this.props.preguntasAceptadas} />
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s8">
+            <div className="container">
+              <h3>Mira tus preguntas por aceptar</h3>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col s12">
+            <div className="container">
+              <PreguntasAceptadas listaAceptadas={this.props.parciales} />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 export default withTracker(() => {
+  let aceptadas = [];
+  let parciales=[];
+  if (Meteor.user()) {
+    aceptadas = ApiPreguntas.find({ creador: Meteor.user()._id }).fetch()
+    parciales = ApiPreguntasParciales.find({ creador: Meteor.user()._id }).fetch()
+  }
+
   return {
+    preguntasAceptadas: aceptadas,
     usuario: Meteor.user()
   };
 })(Perfil);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Meteor } from "meteor/meteor";
-export default class Navbar extends Component {
+import { withTracker } from "meteor/react-meteor-data";
+class Navbar extends Component {
   constructor() {
     super();
     this.state = { change: false };
@@ -77,3 +78,9 @@ export default class Navbar extends Component {
     );
   }
 }
+
+export default withTracker(() => {
+  return {
+    usuario: Meteor.user()
+  };
+})(Navbar);

@@ -38,6 +38,24 @@ class Inicio extends Component {
             >
               Iniciar
             </button>
+
+            <h3>Preguntas</h3>
+            <button
+              className="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              onClick={() => FlowRouter.go("/AgregarPregunta")}
+            >
+              Agrega preguntas!
+            </button>
+            <button
+              className="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+              onClick={() => FlowRouter.go("/CalificarPregunta")}
+            >
+              Califica preguntas!
+            </button>
           </div>
         </div>
         <div className="row">

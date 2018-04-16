@@ -6,16 +6,28 @@ import { Espera } from "../../api/espera.js";
 import { ApiPreguntas } from "../../api/preguntas.js";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
-import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import {
+  Button,
+  Header,
+  Icon,
+  Modal,
+  Grid,
+  Input,
+  Pagination,
+  Segment
+} from "semantic-ui-react";
 
 class Viejas extends Component {
   constructor() {
     super();
     this.state = {
-      open: false
+      open: false,
+      activePage: 1
     };
     this.openModal = this.openModal.bind(this);
   }
+
+  handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
 
   respuestasJugador(partida) {
     if (partida.jugador1 == Meteor.user()._id) return partida.respuestas1;
@@ -41,8 +53,8 @@ class Viejas extends Component {
 
   suma(arreglo) {
     filtrado = arreglo.filter(m => m >= 0);
-    if (filtrado.length == 0){
-        filtrado=[0];
+    if (filtrado.length == 0) {
+      filtrado = [0];
     }
     return filtrado.reduce((a, b) => a + b);
   }
@@ -55,7 +67,7 @@ class Viejas extends Component {
 
   ganadoOPerdido(partida) {
     if (partida.ganador == Meteor.user()._id) return "Haz ganado";
-    return "haz perdido";
+    return "Haz perdido";
   }
 
   contra(partida) {
@@ -66,6 +78,14 @@ class Viejas extends Component {
   }
 
   render() {
+    if (!Meteor.user()) {
+      return (
+        <div>
+          <h4>Debes Loggearte</h4>
+        </div>
+      );
+    }
+
     if (!this.props.partidas) {
       return (
         <div>
@@ -73,48 +93,66 @@ class Viejas extends Component {
         </div>
       );
     } else {
+      const { activePage } = this.state;
       return (
-        <div className="row">
-          {this.props.partidas.map(p => {
-            return (
-              <div key={p._id} className="col s4">
-                <h4 className="center-align">{this.ganadoOPerdido(p)}</h4>
-                <p>
-                  Contra {this.contra(p)} el resultado ha sido{" "}
-                  {this.resultado(p)}
-                </p>
-                <a onClick={this.openModal.bind(this, p._id)}>
-                  Haz click aqui para ver la partida
-                </a>
-                <Modal
-                  open={this.state.open[p._id]}
-                  onClose={this.onCloseModal.bind(this)}
-                >
-                  <Header
-                    icon="winner"
-                    content="Es hora de conocer el resultado"
-                  />
-                  <Modal.Content>
-                    <Preguntas
-                      questions={p.preguntas}
-                      sesion={p._id}
-                      respuesta={this.respuestasJugador(p)}
-                      jugador={p.jugador1 == Meteor.user()._id}
-                      escogida={this.escogidasJugador(p)}
-                    />
-                  </Modal.Content>
-                  <Modal.Actions>
-                    <Button
-                      color="green"
-                      onClick={this.onCloseModal.bind(this)}
+        <div>
+          <Grid columns={3}>
+            <Grid.Column>
+              <Pagination
+                activePage={activePage}
+                onPageChange={this.handlePaginationChange.bind(this)}
+                totalPages={this.props.size}
+              />
+            </Grid.Column>
+            <Grid.Column />
+            <Grid.Column />
+            {this.props.partidas.map(p => {
+              return (
+                <Grid.Column key={p._id}>
+                  <h4 className="center-align">{this.ganadoOPerdido(p)}</h4>
+                  <p>
+                    Contra {this.contra(p)} el resultado ha sido{" "}
+                    {this.resultado(p)}{" "}
+                    <button
+                      className="btn waves-effect waves-light btn-small"
+                      type="submit"
+                      name="action"
+                      onClick={this.openModal.bind(this, p._id)}
                     >
-                      <Icon name="checkmark" /> Terminar
-                    </Button>
-                  </Modal.Actions>
-                </Modal>
-              </div>
-            );
-          })}
+                      Ver partida
+                    </button>
+                  </p>
+
+                  <Modal
+                    open={this.state.open[p._id]}
+                    onClose={this.onCloseModal.bind(this)}
+                  >
+                    <Header
+                      icon="winner"
+                      content="Es hora de conocer el resultado"
+                    />
+                    <Modal.Content>
+                      <Preguntas
+                        questions={p.preguntas}
+                        sesion={p._id}
+                        respuesta={this.respuestasJugador(p)}
+                        jugador={p.jugador1 == Meteor.user()._id}
+                        escogida={this.escogidasJugador(p)}
+                      />
+                    </Modal.Content>
+                    <Modal.Actions>
+                      <Button
+                        color="green"
+                        onClick={this.onCloseModal.bind(this)}
+                      >
+                        <Icon name="checkmark" /> Terminar
+                      </Button>
+                    </Modal.Actions>
+                  </Modal>
+                </Grid.Column>
+              );
+            })}
+          </Grid>
         </div>
       );
     }
@@ -122,13 +160,20 @@ class Viejas extends Component {
 }
 
 export default withTracker(() => {
-  let encontradas = Espera.find({
-    $or: [
-      { jugador1: Meteor.user()._id, terminado: true },
-      { jugador2: Meteor.user()._id, terminado: true }
-    ]
-  }).fetch().reverse();
+  let encontradas = [];
+  if (Meteor.user()) {
+    encontradas = Espera.find({
+      $or: [
+        { jugador1: Meteor.user()._id, terminado: true },
+        { jugador2: Meteor.user()._id, terminado: true }
+      ]
+    })
+      .fetch()
+      .reverse();
+  }
   return {
-    partidas: encontradas
+    usuario: Meteor.user(),
+    partidas: encontradas,
+    size: Math.floor(encontradas.length / 6) + 1
   };
 })(Viejas);

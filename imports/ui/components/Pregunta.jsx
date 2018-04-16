@@ -5,6 +5,7 @@ import { Preguntas } from "../../api/preguntas.js";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { ApiPreguntas } from "../../api/preguntas.js";
+import { Icon } from 'semantic-ui-react'
 
 class Pregunta extends Component {
   constructor(props) {
@@ -40,7 +41,8 @@ class Pregunta extends Component {
       this.setState({ visibilty: true });
     }
     let b = this.props.escogidasJug;
-    b[this.props.posicion] = value
+    b[this.props.posicion] = value;
+    this.setState({escogida: value})
     Meteor.call("espera.updateRespuestas", this.props.sesionId, this.props.cualJugador, a, b)
   }
 
@@ -49,7 +51,7 @@ class Pregunta extends Component {
       if (this.state.choose) {
         return (
           <label>
-            <input type="checkbox" defaultChecked />
+            <input type="checkbox" defaultChecked disabled={true}/>
             <span>Correcto</span>
           </label>
         );
@@ -61,8 +63,7 @@ class Pregunta extends Component {
         else if ("quinta" == this.state.data.respuesta) respuesta = this.state.data.quinta;
         return (
           <label>
-            <input type="checkbox" />
-            <span>Incorrecto, la respuesta correcta era {respuesta}</span>
+            <h6> <Icon name='ban' size='big'/> Incorrecto, la respuesta correcta era {respuesta}</h6>>
           </label>
         );
       }

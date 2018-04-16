@@ -127,7 +127,7 @@ class Partida extends Component {
     if (this.props.contricante) {
       return (
         <div>
-          <h1>Tu contricante es {this.props.contricante.username}</h1>
+          <h1 className="contricante">Tu contricante es {this.props.contricante.username}</h1>
           {this.props.fin ? (
             <button
               className="btn waves-effect waves-light"
@@ -152,7 +152,7 @@ class Partida extends Component {
       );
     } else {
       return (
-        <div>
+        <div className="container">
           <h1>Espera porfavor, te estamos buscando un contricante</h1>
           <div className="preloader-wrapper big active">
             <div className="spinner-layer spinner-blue-only">
