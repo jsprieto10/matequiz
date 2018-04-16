@@ -9,7 +9,7 @@ import { Accounts } from "meteor/accounts-base";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
 import PreguntaSinLogica from "./PreguntaSinLogica";
 
-class PreguntasAceptadas extends Component {
+class PreguntasSinLogica extends Component {
   constructor() {
     super();
     this.state = {
@@ -93,4 +93,4 @@ class PreguntasAceptadas extends Component {
   }
 }
 
-export default PreguntasAceptadas;
+export default PreguntasSinLogica;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withTracker } from "meteor/react-meteor-data";
 import Navbar from "./Navbar";
-import PreguntasAceptadas from "./PreguntasAceptadas";
+import PreguntasSinLogica from "./PreguntasSinLogica";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
@@ -131,7 +131,13 @@ class Perfil extends Component {
         <div className="row">
           <div className="col s12">
             <div className="container">
-              <PreguntasAceptadas listaAceptadas={this.props.preguntasAceptadas} />
+              {this.props.preguntasAceptadas.length ? (
+                <PreguntasSinLogica
+                  listaAceptadas={this.props.preguntasAceptadas}
+                />
+              ) : (
+                <h6>Tienes 0 preguntas, espera a que te califiquen</h6>
+              )}
             </div>
           </div>
         </div>
@@ -145,7 +151,18 @@ class Perfil extends Component {
         <div className="row">
           <div className="col s12">
             <div className="container">
-              <PreguntasAceptadas listaAceptadas={this.props.Preguntasparciales} />
+              {this.props.Preguntasparciales.length ? (
+                <PreguntasSinLogica
+                  listaAceptadas={this.props.Preguntasparciales}
+                />
+              ) : (
+                <div>
+                <h6>
+                  Tienes 0 preguntas por aceptar, crea más preguntas {" "}
+                  <a className="under" href onClick={() => FlowRouter.go("/CalificarPregunta")}>ahora </a>
+                </h6>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -155,11 +172,13 @@ class Perfil extends Component {
 }
 
 export default withTracker(() => {
-  let aceptadas = null;
-  let parciales=null;
+  let aceptadas = false;
+  let parciales = false;
   if (Meteor.user()) {
-    aceptadas = ApiPreguntas.find({ creador: Meteor.user()._id }).fetch()
-    parciales = ApiPreguntasParciales.find({ creador: Meteor.user()._id }).fetch()
+    aceptadas = ApiPreguntas.find({ creador: Meteor.user()._id }).fetch();
+    parciales = ApiPreguntasParciales.find({
+      creador: Meteor.user()._id
+    }).fetch();
   }
 
   return {

@@ -26,6 +26,7 @@ class Login extends Component {
                 console.log("se ha loggeado")
                 let current = Meteor.user();
                 Session.set("current", current);
+                M.toast({ html: "Se ha loggeado correctamente!" });
                 FlowRouter.go('/')
             }
         });

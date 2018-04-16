@@ -23,20 +23,21 @@ class Register extends Component {
     event.preventDefault();
     let name = event.target.id;
     let value = event.target.value;
-    if (name == 'sexo'){
+    if (name == "sexo") {
       estado = this.state.profile;
-      estado.sexo=value
-      if ( value=='masculino') estado.img_profile = "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100"
-      else estado.img_profile = "http://www.epsomps.vic.edu.au/wp-content/uploads/2016/09/512x512-1-300x300.png"
+      estado.sexo = value;
+      if (value == "masculino")
+        estado.img_profile =
+          "https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?resize=256%2C256&quality=100";
+      else
+        estado.img_profile =
+          "http://www.epsomps.vic.edu.au/wp-content/uploads/2016/09/512x512-1-300x300.png";
       this.setState({ profile: estado });
-    }
-    else if (name=='nacimiento'){
+    } else if (name == "nacimiento") {
       estado = this.state.profile;
-      estado.nacimiento=value
+      estado.nacimiento = value;
       this.setState({ profile: estado });
-    }
-    else
-    this.setState({ [name]: value });
+    } else this.setState({ [name]: value });
   }
 
   handleSubmit(e) {
@@ -52,20 +53,18 @@ class Register extends Component {
       Accounts.createUser(accountInfo, function(er) {
         if (er) {
           M.toast({ html: er.reason });
+        }
+        else{
+          M.toast({ html: "Se ha registrado correctamente!" });
+        }
+      });
+      Meteor.loginWithPassword(this.state.email, this.state.password, er => {
+        if (er) {
+          M.toast({ html: er.reason });
         } else {
-          Meteor.loginWithPassword(
-            this.state.email,
-            this.state.password,
-            er => {
-              if (er) {
-                M.toast({ html: er.reason });
-              } else {
-                console.log("se ha loggeado");
-                let current = Meteor.user();
-                FlowRouter.go("/");
-              }
-            }
-          );
+          console.log("se ha loggeado");
+          let current = Meteor.user();
+          FlowRouter.go("/");
         }
       });
     } else {
@@ -134,7 +133,7 @@ class Register extends Component {
               <div className="row">
                 <div className="col s12">
                   <label>
-                    Selecciona tu sexo: 
+                    Selecciona tu sexo:
                     <select
                       id="sexo"
                       className="browser-default"
@@ -142,7 +141,7 @@ class Register extends Component {
                       onChange={this.handleChange.bind(this)}
                     >
                       <option value="" disabled={true}>
-                        __ 
+                        __
                       </option>
                       <option value="masculino">Masculino</option>
                       <option value="femenino">Femenino</option>
@@ -152,10 +151,8 @@ class Register extends Component {
               </div>
               <div className="row">
                 <div className="col s12">
-                  <label>
-                    Agrega tu año de nacimiento: 
-                    </label>
-                    <input
+                  <label>Agrega tu año de nacimiento:</label>
+                  <input
                     id="nacimiento"
                     type="date"
                     className="validate"
