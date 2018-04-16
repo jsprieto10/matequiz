@@ -72,7 +72,7 @@ class Viejas extends Component {
   }
 
   contra(partida) {
-    if (partida.ganador == Meteor.user._id) {
+    if (partida.ganador == Meteor.user()._id) {
       return Meteor.users.findOne(partida.perdedor).username;
     }
     return Meteor.users.findOne(partida.ganador).username;
@@ -101,11 +101,15 @@ class Viejas extends Component {
   filterContricante() {
     return this.props.partidas.filter(pre => {
       let contricante = Meteor.users.findOne(pre.ganador).username;
-      if (pre.ganador != Meteor.user()._id) {
+      let user = Meteor.user();
+      if (pre.ganador == user._id) {
         contricante = Meteor.users.findOne(pre.perdedor).username;
-        
       }
-      if (contricante.startsWith(this.state.contricante))
+      if (
+        contricante
+          .toLocaleLowerCase()
+          .startsWith(this.state.contricante.toLocaleLowerCase())
+      )
         return true;
       return false;
     });
@@ -130,27 +134,30 @@ class Viejas extends Component {
       let paginada = this.paginacion(lis);
       return (
         <div>
-          <Grid columns={3}>
-            <Grid.Column>
-              <Pagination
-                activePage={this.state.activePage}
-                onPageChange={this.handlePaginationChange.bind(this)}
-                totalPages={this.props.size}
-              />
-            </Grid.Column>
-            <Grid.Column>
-              <div className="input-field col s6">
-                <input
-                  id="contricante"
-                  type="text"
-                  className="validate"
-                  value={this.state.contricante}
-                  onChange={this.cambioContricante.bind(this)}
+          <Grid>
+            <Grid.Row>
+              <Grid.Column width={8}>
+                <Pagination
+                  activePage={this.state.activePage}
+                  onPageChange={this.handlePaginationChange.bind(this)}
+                  totalPages={this.props.size}
                 />
-                <label forhtml="contricante">First Name</label>
-              </div>
-            </Grid.Column>
-            <Grid.Column />
+              </Grid.Column>
+              <Grid.Column width={8}>
+                <div className="input-field col s12">
+                  <input
+                    id="contricante"
+                    type="text"
+                    className="validate"
+                    value={this.state.contricante}
+                    onChange={this.cambioContricante.bind(this)}
+                  />
+                  <label forhtml="contricante">Nombre de contricante</label>
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+          <Grid columns={3}>
             {paginada.map(p => {
               return (
                 <Grid.Column key={p._id}>
