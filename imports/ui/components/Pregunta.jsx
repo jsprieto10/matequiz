@@ -35,7 +35,7 @@ class Pregunta extends Component {
     if (value == this.state.data.respuesta) {
       this.setState({ visibilty: true, choose: true });
       a[this.props.posicion] = 1;
-      Meteor.users.update({_id: Meteor.user()._id}, {$inc: {"profile.points": 10}});
+      Meteor.call("puntosUsers.preguntaCorrecta");
     } else {
       a[this.props.posicion] = -1;
       this.setState({ visibilty: true });
@@ -43,7 +43,7 @@ class Pregunta extends Component {
     let b = this.props.escogidasJug;
     b[this.props.posicion] = value;
     this.setState({escogida: value})
-    Meteor.call("espera.updateRespuestas", this.props.sesionId, this.props.cualJugador, a, b)
+    Meteor.call("espera.updateRespuestas", this.props.sesionId, this.props.cualJugador, a, b);
   }
 
   answer() {

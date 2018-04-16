@@ -78,7 +78,7 @@ class Perfil extends Component {
         <div className="row">
           <div className="container">
             <div className="col s4">
-              <h3>Mira tu perfil</h3>
+              <h3>Tú perfil</h3>
               <div className="row">
                 <img
                   width="250px"
@@ -94,7 +94,7 @@ class Perfil extends Component {
             </div>
             <div className="col s8">
               <div className="container">
-                <h3>Mira tu información</h3>
+                <h3>Tú información</h3>
                 <table>
                   <thead>
                     <tr>
@@ -124,7 +124,7 @@ class Perfil extends Component {
         <div className="row">
           <div className="col s8">
             <div className="container">
-              <h3>Mira tus preguntas aceptadas</h3>
+              <h3>Preguntas aceptadas</h3>
             </div>
           </div>
         </div>
@@ -138,14 +138,14 @@ class Perfil extends Component {
         <div className="row">
           <div className="col s8">
             <div className="container">
-              <h3>Mira tus preguntas por aceptar</h3>
+              <h3>Preguntas por aceptar</h3>
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col s12">
             <div className="container">
-              <PreguntasAceptadas listaAceptadas={this.props.parciales} />
+              <PreguntasAceptadas listaAceptadas={this.props.Preguntasparciales} />
             </div>
           </div>
         </div>
@@ -155,8 +155,8 @@ class Perfil extends Component {
 }
 
 export default withTracker(() => {
-  let aceptadas = [];
-  let parciales=[];
+  let aceptadas = null;
+  let parciales=null;
   if (Meteor.user()) {
     aceptadas = ApiPreguntas.find({ creador: Meteor.user()._id }).fetch()
     parciales = ApiPreguntasParciales.find({ creador: Meteor.user()._id }).fetch()
@@ -164,6 +164,7 @@ export default withTracker(() => {
 
   return {
     preguntasAceptadas: aceptadas,
+    Preguntasparciales: parciales,
     usuario: Meteor.user()
   };
 })(Perfil);

@@ -16,6 +16,7 @@ Meteor.methods({
             quinta,
             respuesta,
             likes:0,
+            dislikes: 0,
             creador: this.userId,
             contestaron:[this.userId],
             createdAt: new Date()

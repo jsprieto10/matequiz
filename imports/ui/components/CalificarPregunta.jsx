@@ -16,8 +16,9 @@ class CalificarPregunta extends Component {
         if (this.props.pregunta.likes == 10 && isLike){
             let objeto = _.clone(this.props.pregunta);
             delete objeto._id;
-            Meteor.call("preguntas.insert", objeto)
+            Meteor.call("preguntas.insert", objeto);
             Meteor.call("preguntasParciales.remove", this.props.pregunta._id);
+            Meteor.call("puntosUsers.calificado", this.props.pregunta.creador, 9);
 
         }
         else if (this.props.pregunta.dislkes == 10 && !isLike){
@@ -25,7 +26,10 @@ class CalificarPregunta extends Component {
         }
         else{
             Meteor.call("preguntasParciales.updateLike", this.props.pregunta._id, isLike);
+            Meteor.call("puntosUsers.calificado", this.props.pregunta.creador, 5);
         }
+        Meteor.call("puntosUsers.califico");
+        M.toast({ html: "Haz ganado 2 puntos" });
     }
 
   render() {
@@ -34,6 +38,8 @@ class CalificarPregunta extends Component {
         <div>
           <Navbar />
           <div className="container">
+          <h4>Obten puntos al calificar preguntas: </h4>
+          <p>Por cada pregunta que califiques obtendras 2 puntos, no olvides agregar preguntas para ganas más puntos</p>
             {this.props.pregunta ? (
               <div>
                 <PreguntaSinLogica data={this.props.pregunta} />
@@ -48,7 +54,7 @@ class CalificarPregunta extends Component {
                 <br/>
               </div>
             ) : (
-              <h4>No se ha encontrado ninguna pregunta para calificar</h4>
+              <h4>No se ha encontrado ninguna pregunta para calificar, vuelve más tarde</h4>
             )}
           </div>
         </div>

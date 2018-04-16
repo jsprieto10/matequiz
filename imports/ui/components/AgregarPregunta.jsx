@@ -55,6 +55,7 @@ class Pregunta extends Component {
         quinta: "",
         respuesta: "0"
       });
+      M.toast({ html: "Pregunta agregada, espera a que la califiquen" });
     } else {
       M.toast({ html: "Debe seleccionar una respuesta" });
     }
@@ -81,7 +82,7 @@ class Pregunta extends Component {
                     onChange={this.handleChange.bind(this)}
                     required
                   />
-                  <label htmlFor="pregunta">Pregunta</label>
+                  <label htmlFor="pregunta">URL de la imagen de la pregunta</label>
                 </div>
               </div>
               <div className="row">
@@ -94,7 +95,7 @@ class Pregunta extends Component {
                     onChange={this.handleChange.bind(this)}
                     required
                   />
-                  <label htmlFor="primera">Primera respuesta</label>
+                  <label htmlFor="primera">Primera opción</label>
                 </div>
               </div>
               <div className="row">
@@ -107,7 +108,7 @@ class Pregunta extends Component {
                     onChange={this.handleChange.bind(this)}
                     required
                   />
-                  <label htmlFor="segunda">Segunda respuesta</label>
+                  <label htmlFor="segunda">Segunda opción</label>
                 </div>
               </div>
               <div className="row">
@@ -120,7 +121,7 @@ class Pregunta extends Component {
                     onChange={this.handleChange.bind(this)}
                     required
                   />
-                  <label htmlFor="tercera">Tercera respuesta</label>
+                  <label htmlFor="tercera">Tercera opción</label>
                 </div>
               </div>
               <div className="row">
@@ -133,7 +134,7 @@ class Pregunta extends Component {
                     onChange={this.handleChange.bind(this)}
                     required
                   />
-                  <label htmlFor="cuarta">Cuarta respuesta</label>
+                  <label htmlFor="cuarta">Cuarta opción</label>
                 </div>
               </div>
               <div className="row">
@@ -146,7 +147,7 @@ class Pregunta extends Component {
                     onChange={this.handleChange.bind(this)}
                     required
                   />
-                  <label htmlFor="quinta">Quinta respuesta</label>
+                  <label htmlFor="quinta">Quinta opción</label>
                 </div>
               </div>
               <div className="row">
@@ -158,7 +159,7 @@ class Pregunta extends Component {
                     value={this.state.respuesta}
                   >
                     <option value="0" disabled>
-                      Escoge una opción
+                      Escoge la opción correcta
                     </option>
                     <option value="primera">Primera</option>
                     <option value="segunda">Segunda</option>
