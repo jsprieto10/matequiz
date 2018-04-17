@@ -5,6 +5,9 @@ import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import Footer from "./Footer";
 
+// Camilo A Carrillo N: Hubiera sido cool que se puediera decidir si agregar una pregunta mediante imagen o texto en vez de solo permitir
+//                      imagenes.
+
 class Pregunta extends Component {
   constructor() {
     super();
