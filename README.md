@@ -1,3 +1,5 @@
+// Camilo A Carrillo N: Deberian crear test para los componentes y los metodos, esto facilita el testeo de la App.
+
 # MateQuiz
 ## Descripción
 Este proyecto esta creado para aquellas personas que quieran desarrollar o poner en práctica sus habilidades matemáticas.
