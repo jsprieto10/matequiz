@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+// Camilo A Carrillo N: Podrian usar las propiedades Col-xx-xx de Bootstrap para dividir la lista en 2 o 3 dependiendo del tamaño
+//                      de la pantalla y así hacer mas amigable la visualización de los mejores jugadores.
+
 class ListaLeaders extends Component {
   render() {
     let rest = this.props.lista.slice();
