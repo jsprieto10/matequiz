@@ -2,6 +2,8 @@ import { Meteor } from "meteor/meteor";
 import { Mongo } from "meteor/mongo";
 import { check } from "meteor/check";
 
+// Camilo A Carrillo N: Deberian configurar el RateLimit para cada metodo y así poder manejar posibles ataques al servidor.
+
 export const ApiPreguntasParciales = new Mongo.Collection("preguntasParciales");
 
 Meteor.methods({
